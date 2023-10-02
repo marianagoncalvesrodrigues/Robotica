@@ -74,7 +74,14 @@ end
  q2r = eval(subs(s2(2),[a1 a2 x y],[1 1 xfk yfk]));
  q2 = rad2deg(q2r)
 
+%%
+%Resolvendo o problema de minimização da equação cinemática direta em relação a posição desejada temos:
+ e = ETS2.Rz("q1")*ETS2.Tx(1)*ETS2.Rz("q2")*ETS2.Tx(1);
+ pstar = [0.6 0.7]; % Desired position
+ q = fminsearch(@(q) norm(se2(e.fkine(q)).trvec-pstar),[0 0])
+ printtform2d(e.fkine(q),unit="deg")
 
-
-
+%Executando com valores do exemplo anterior
+ pstar = [1.2080 1.4397];
+ q = fminsearch(@(q) norm(se2(e.fkine(q)).trvec-pstar),[0 0])
 
