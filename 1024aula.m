@@ -30,5 +30,19 @@ qsol = pandaIK("panda_hand",TE.tform,ones(1,6),pandaHome)
 handT = panda.getTransform(qsol,"panda_hand");
 printtform(handT,mode="xyz",unit="deg")
 panda.show(qsol);
+%% Aula 10
+t = linspace(0,1,50); % 0 to 1 in 50 steps
+[q,qd,qdd] = quinticpolytraj([0 1],[0 1],t);
+stackedplot(t,[q' qd' qdd'])
+%%
+[q2,qd2,qdd2] = trapveltraj([0 1],50,EndTime=1, PeakVelocity=1.2);
+[q3,qd3,qdd3] = trapveltraj([0 1], 50, EndTime=1, PeakVelocity=2);
+figure(1)
+stackedplot(t,[q2' qd2' qdd2'])
+figure(2)
+stackedplot(t,[q3' qd3' qdd3'])
+
+
+
 
 
