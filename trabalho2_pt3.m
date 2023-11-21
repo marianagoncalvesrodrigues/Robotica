@@ -59,8 +59,9 @@ x = mstraj(via,[],[3 0.25 0.5 0.25],[],0.01,0.1);
 qcycle4 = ikineTrajNum(leg2,se3(eye(3),x),"link8", ...
 weights=[0 0 0 1 1 1]);
 %% qcycle5 para o circulo - trajetória da perna 
-xi = (112*cos(deg2rad(10))-100)/100; xf = (112*cos(deg2rad(55))-100)/100; ...
-    yi = (112*sin(deg2rad(10))-50)/100; yf = (112*sin(deg2rad(55))-50)/100;...
+raio=150
+xi = (raio*cos(deg2rad(10))-100)/100; xf = (raio*cos(deg2rad(55))-100)/100; ...
+    yi = -(raio*sin(deg2rad(10))-50)/100; yf = -(raio*sin(deg2rad(55))-50)/100;...
     zu = -120/100; zd = -140/100;
 via = [xi yi zd
 xf yf zd %pe baixo
@@ -75,8 +76,8 @@ weights=[0 0 0 1 1 1]);
 %y vai de yi -30,56 a yf 41,74 -> 112*sen(10)-50 e 112*sen(55)-50
 %x 112*cos(10 graus) - 100 e 112*cos(55 graus) - 100 -> xi 10,298 e xf -35,75
 %x vai de 10,2 a -28
-xf = (112*cos(deg2rad(10))-100)/100; xi = (112*cos(deg2rad(55))-100)/100; ...
-    yf = -(112*sin(deg2rad(10))-50)/100; yi = -(112*sin(deg2rad(55))-50)/100;...
+xf = (raio*cos(deg2rad(10))-100)/100; xi = (raio*cos(deg2rad(55))-100)/100; ...
+    yf = -(raio*sin(deg2rad(10))-50)/100; yi = -(raio*sin(deg2rad(55))-50)/100;...
     zu = -120/100; zd = -140/100;
 via = [xi yi zd
 xf yf zd %pe baixo
@@ -143,6 +144,20 @@ while(1)
     r.waitfor;
 end
 %% Para girar
+%function saida = girar()
+close all
+i=0;
+while(1)
+%for i = 1:5000
+    i=i+1;
+ 	legs(1).show(gait(qcycle6,i,0,false),FastUpdate=true,PreservePlot=false); hold on;
+	 legs(2).show(gait(qcycle6,i,100,false),FastUpdate=true,PreservePlot=false);
+ 	legs(3).show(gait(qcycle5,i,200,true),FastUpdate=true,PreservePlot=false);
+ 	legs(4).show(gait(qcycle5,i,300,true),FastUpdate=true,PreservePlot=false); hold off;
+    r.waitfor;
+end
+%end
+%% Para girar, frente e lado
 close all
 i=0;
 while(1)
